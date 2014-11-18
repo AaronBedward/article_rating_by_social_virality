@@ -14,6 +14,7 @@ function get_plusones($url) {
 
 function get_fb_likes_shares_comments($url) {
 	$url = "https://api.facebook.com/method/links.getStats?format=json&urls=".$url;
+	try {
 	$curl = curl_init();
 	curl_setopt($curl, CURLOPT_URL, $url);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -25,6 +26,11 @@ function get_fb_likes_shares_comments($url) {
 	echo 'Code line successful here too';
 	$json = json_decode($curl_results, true);
 	return array(intval($json[0]["like_count"]), intval($json[0]["share_count"]), intval($json[0]["comment_count"]));
+	} 
+	catch (Exception $e) {
+    		echo 'Caught exception: ',  $e->getMessage(), "\n";
+    		return 0;
+	}	
 }
 
 function get_linkedin_shares ($url) {
