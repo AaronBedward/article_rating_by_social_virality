@@ -19,7 +19,7 @@ function get_fb_likes_shares_comments($url) {
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	$curl_results = curl_exec ($curl);
 	curl_close ($curl);
-	print($curl_results);
+	print $curl_results;
 	$json = json_decode($curl_results, true);
 	return array(intval($json[0]["like_count"]), intval($json[0]["share_count"]), intval($json[0]["comment_count"]));
 }
